@@ -1,0 +1,11 @@
+F:\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe.config
+F:\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe
+F:\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.pdb
+F:\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csprojResolveAssemblyReference.cache
+F:\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Properties.Resources.resources
+F:\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csproj.GenerateResource.Cache
+F:\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.exe
+F:\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.pdb
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe.config
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.exe
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.pdb
