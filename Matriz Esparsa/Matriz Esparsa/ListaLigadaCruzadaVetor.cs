@@ -9,15 +9,14 @@ namespace Matriz_Esparsa
 {
     class ListaLigadaCruzada
     {
-        Celula primeiro;
-        Celula anterior;
-        Celula atual;
-        int linhas;
-        int colunas;
+        Celula[] linhas;
+        Celula[] colunas;
+        Celula linhaAtual;
+        Celula linhaAnterior;
+        Celula colunaAtual;
+        Celula colunaAnterior;
 
-        //Todos os métodos que não foram atualizados, precisam ser revistos e adaptados para
-
-        //Criar a estrutura básica da matriz esparsa com dimensão M x N - Construtor - feito - atualizado
+        //Criar a estrutura básica da matriz esparsa com dimensão M x N - Construtor - feito
         //Inserir um novo elemento em uma posição(l, c) da matriz - InserirEm - feito
         //Ler um arquivo texto com as coordenadas e os valores não nulos, armazenando-os na matriz - a fazer
         //Retornar o valor de uma posição(l, c) da matriz - ValorDe - feito
@@ -32,34 +31,36 @@ namespace Matriz_Esparsa
         //exibidas em seu próprio gridView.O resultado deve gerar uma nova estrutura de matriz esparsa e
         //exibido em um gridview próprio. - a fazer
 
-        //Criar a estrutura básica da matriz esparsa com dimensão M x N - Construtor - feito - atualizado
+        //Criar a estrutura básica da matriz esparsa com dimensão M x N - Construtor - feito
         public ListaLigadaCruzada(int qtdeLinhas, int qtdeColunas)
         {
             qtdeLinhas++;   // A primeira linha é feita de nós cabeças, havendo l-1 linhas de dados
             qtdeColunas++;  // O mesmo para as colunas
-            linhas = qtdeLinhas;
-            colunas = qtdeColunas;
+            linhas = new Celula[qtdeLinhas]; 
+            colunas = new Celula[qtdeColunas]; 
 
-            primeiro = new Celula(null, null, 0, 0, Double.NaN);
-            int i = 1;
-            anterior = primeiro;
-            atual = null;
+            int i = 0;
+
             for (; i < qtdeLinhas; i++)
-            {
-                atual = new Celula(null, anterior, i, 0, Double.NaN);
-                anterior = atual;
-            }
-            primeiro.Abaixo = atual;
+                linhas[i] = new Celula(null, null, i, 0, Double.NaN);
 
-
-            anterior = primeiro;
-            atual = null;
             for (i = 1; i < qtdeColunas; i++)
-            {
-                atual = new Celula(anterior, null, 0, i, Double.NaN);
-                anterior = atual;
-            }
-            primeiro.Direita = atual;
+                colunas[i] = new Celula(null, null, 0, i, Double.NaN);
+
+            linhas[0] = colunas[0];
+
+            for (i = 0; i < qtdeLinhas; i++)
+                if (i != qtdeLinhas - 1)
+                    linhas[i].Abaixo = linhas[i + 1];
+                else
+                    linhas[i].Abaixo = linhas[0];
+
+            for (i = 0; i < qtdeColunas; i++)
+                if (i != qtdeColunas - 1)
+                    colunas[i].Abaixo = colunas[i + 1];
+                else
+                    colunas[i].Abaixo = colunas[0];
+
         }
 
         //Inserir um novo elemento em uma posição(l, c) da matriz - InserirEm - feito

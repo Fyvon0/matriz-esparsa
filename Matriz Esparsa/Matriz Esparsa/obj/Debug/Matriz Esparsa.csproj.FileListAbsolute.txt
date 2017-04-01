@@ -9,3 +9,6 @@ F:\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.pdb
 F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe.config
 F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.exe
 F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.pdb
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe.config
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.exe
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.pdb
