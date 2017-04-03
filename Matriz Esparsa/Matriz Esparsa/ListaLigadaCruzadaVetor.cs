@@ -9,8 +9,8 @@ namespace Matriz_Esparsa
 {
     class ListaLigadaCruzada
     {
-        Celula[] linhas;
-        Celula[] colunas;
+        Celula[] linhas;  // usamos vetores pois a quantidade de linhas e colunas de uma matriz não se altera ao longo da execução
+        Celula[] colunas; // e ao usar vetores agilizamos o acesso a células específicas
         Celula linhaAtual;
         Celula linhaAnterior;
         Celula colunaAtual;
@@ -34,6 +34,9 @@ namespace Matriz_Esparsa
         //Criar a estrutura básica da matriz esparsa com dimensão M x N - Construtor - feito
         public ListaLigadaCruzada(int qtdeLinhas, int qtdeColunas)
         {
+            if (qtdeLinhas <= 0 || qtdeColunas <= 0)
+                throw new Exception("Quantidade inválida de linhas ou colunas");
+
             qtdeLinhas++;   // A primeira linha é feita de nós cabeças, havendo l-1 linhas de dados
             qtdeColunas++;  // O mesmo para as colunas
             linhas = new Celula[qtdeLinhas]; 
@@ -42,39 +45,40 @@ namespace Matriz_Esparsa
             int i = 0;
 
             for (; i < qtdeLinhas; i++)
+            {
                 linhas[i] = new Celula(null, null, i, 0, Double.NaN);
+                linhas[i].Direita = linhas[i]; // não existe dado ainda, logo o nó aponta para si mesmo
+                if (i != 0)
+                    linhas[i - 1].Abaixo = linhas[i]; // faz o nó anterior apontar para o nó atual
+            }
+            linhas[i - 1].Abaixo = linhas[0]; // faz o último nó cabeça nas linhas apontar para o primeiro
+
+            colunas[0] = linhas[0]; // nó comum entre as linhas e as colunas
 
             for (i = 1; i < qtdeColunas; i++)
+            {
                 colunas[i] = new Celula(null, null, 0, i, Double.NaN);
-
-            linhas[0] = colunas[0];
-
-            for (i = 0; i < qtdeLinhas; i++)
-                if (i != qtdeLinhas - 1)
-                    linhas[i].Abaixo = linhas[i + 1];
-                else
-                    linhas[i].Abaixo = linhas[0];
-
-            for (i = 0; i < qtdeColunas; i++)
-                if (i != qtdeColunas - 1)
-                    colunas[i].Abaixo = colunas[i + 1];
-                else
-                    colunas[i].Abaixo = colunas[0];
-
+                colunas[i].Abaixo = colunas[i]; // não existe dado ainda, logo o nó aponta para si mesmo
+                colunas[i - 1].Direita = colunas[i]; // faz o nó anterior apontar para o atual
+            }
+            colunas[i - 1].Direita = colunas[0]; // faz o último nó cabeça das colunas apontar para o primeiro
         }
 
         //Inserir um novo elemento em uma posição(l, c) da matriz - InserirEm - feito
         public bool InserirEm (int linha, int coluna, double valor)
         {
-            if (linha > linhas.Length - 1 || linha < 1 || coluna > colunas.Length - 1 || coluna < 1)
+            if (linha > linhas.Length - 1 || linha < 1 || coluna > colunas.Length - 1 || coluna < 1) // se a posição passada por parâmetro for inválida, retorna falso
+                return false;
+
+            if (Double.IsNaN(valor)) // nós não queremos armazenar nada nulo
                 return false;
 
             linhaAnterior = linhas[linha];
             linhaAtual = linhas[linha].Direita;
-            while (linhaAtual.Coluna <= coluna || linhaAtual.Coluna != 0)
+            while (linhaAtual.Coluna <= coluna && linhaAtual.Coluna != 0)
             {
-                if (linhaAtual.Coluna == coluna)
-                    return false;
+                if (linhaAtual.Coluna == coluna) //se já existe algo na mesma linha e na mesma coluna
+                    return false;                //retorna falso pois não pode inserir
                 linhaAnterior = linhaAtual;
                 linhaAtual = linhaAtual.Direita;
             }
@@ -84,10 +88,8 @@ namespace Matriz_Esparsa
 
             colunaAnterior = colunas[coluna];
             colunaAtual = colunas[coluna].Abaixo;
-            while (colunaAtual.Linha <= linha || colunaAtual.Linha != 0)
+            while (colunaAtual.Linha <= linha && colunaAtual.Linha != 0)
             {
-                if (colunaAtual.Linha == linha)
-                    return false;
                 colunaAnterior = colunaAtual;
                 colunaAtual = colunaAtual.Abaixo;
             }
@@ -105,14 +107,14 @@ namespace Matriz_Esparsa
                 throw new Exception("Valor de linha e/ou coluna inválido");
 
             linhaAtual = linhas[linha].Direita;
-            while (linhaAtual.Coluna <= coluna || linhaAtual.Coluna != 0)
+            while (linhaAtual.Coluna <= coluna && linhaAtual.Coluna != 0)
             {
                 if (linhaAtual.Coluna == coluna)
                     return linhaAtual.Valor;
                 linhaAtual = linhaAtual.Direita;
             }
 
-            return 0.0D;
+            return Double.NaN;
         }
          
         //Exibir a matriz na tela, em um gridView - ExibirNoGridView - feito
@@ -120,14 +122,17 @@ namespace Matriz_Esparsa
         {
             dgv.Rows.Clear();
             dgv.Columns.Clear();
-            dgv.ColumnCount = colunas.Length - 2;
-            dgv.RowCount = linhas.Length - 2;
+            dgv.ColumnCount = colunas.Length - 1;
+            dgv.RowCount = linhas.Length - 1;
 
             linhaAtual = linhas[1].Direita;
             while (linhaAtual.Linha != 0)
             {
                 while (linhaAtual.Coluna != 0)
+                {
                     dgv.Rows[linhaAtual.Linha - 1].Cells[linhaAtual.Coluna - 1].Value = linhaAtual.Valor;
+                    linhaAtual = linhaAtual.Direita;
+                }
                 linhaAtual = linhaAtual.Abaixo.Direita;
             }
         }
@@ -140,6 +145,7 @@ namespace Matriz_Esparsa
                 colunas[i] = null;
             for (i = 0; i < linhas.Length; i++)
                 linhas[i] = null;
+            colunas = linhas = null;
             linhaAnterior = linhaAtual = colunaAnterior = colunaAtual = null;
         }
 
@@ -152,7 +158,7 @@ namespace Matriz_Esparsa
             linhaAnterior = linhas[linha];
             linhaAtual = linhas[linha].Direita;
             bool achou = false;
-            while (linhaAtual.Coluna <= coluna || linhaAtual.Coluna != 0)
+            while (linhaAtual.Coluna <= coluna && linhaAtual.Coluna != 0)
             {
                 if (linhaAtual.Coluna == coluna)
                 {
@@ -167,7 +173,6 @@ namespace Matriz_Esparsa
                 return false;
 
             linhaAnterior.Direita = linhaAtual.Direita;
-
             linhaAtual = null;
 
             colunaAnterior = colunas[coluna];
