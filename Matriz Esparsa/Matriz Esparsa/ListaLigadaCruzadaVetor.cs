@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Matriz_Esparsa
 {
@@ -18,7 +19,7 @@ namespace Matriz_Esparsa
 
         //Criar a estrutura básica da matriz esparsa com dimensão M x N - Construtor - feito - atualizado
         //Inserir um novo elemento em uma posição(l, c) da matriz - InserirEm - feito
-        //Ler um arquivo texto com as coordenadas e os valores não nulos, armazenando-os na matriz - a fazer
+        //Ler um arquivo texto com as coordenadas e os valores não nulos, armazenando-os na matriz - LerArquivo - a fazer
         //Retornar o valor de uma posição(l, c) da matriz - ValorDe - feito
         //Exibir a matriz na tela, em um gridView - ExibirNoGridView - feito
         //Liberar todas as posições alocadas da matriz, incluindo sua estrutura básica - Limpar - feito
@@ -44,7 +45,7 @@ namespace Matriz_Esparsa
 
             anterior = primeiro = new Celula(null, null, 0, 0, Double.NaN);
 
-            for (; i < qtdeLinhas; i++)
+            for (; i <= qtdeLinhas; i++)
             {
                 atual = new Celula(null, null, i, 0, Double.NaN);
                 atual.Direita = atual; // não existe dado ainda, logo o nó aponta para si mesmo
@@ -53,9 +54,10 @@ namespace Matriz_Esparsa
             }
             atual.Abaixo = primeiro; // faz o último nó cabeça nas linhas apontar para o primeiro
 
-            for (i = 0; i < qtdeColunas; i++)
+            anterior = primeiro;
+            for (i = 0; i <= qtdeColunas; i++)
             {
-                atual = new Celula(null, null, i, 0, Double.NaN);
+                atual = new Celula(null, null, 0, i, Double.NaN);
                 atual.Abaixo = atual; // não existe dado ainda, logo o nó aponta para si mesmo
                 anterior.Direita = atual; // faz o nó anterior apontar para o nó atual
                 anterior = atual;
@@ -63,24 +65,30 @@ namespace Matriz_Esparsa
             atual.Direita = primeiro; // faz o último nó cabeça das colunas apontar para o primeiro
         }
 
+        public ListaLigadaCruzada(String nomeArquivo)
+        {
+            this.LerArquivo(nomeArquivo);
+        }
+
         //Inserir um novo elemento em uma posição(l, c) da matriz - InserirEm - feito - atualizado
         public bool InserirEm (int linha, int coluna, double valor)
         {
             if (linha > linhas || linha < 1 || coluna > colunas || coluna < 1) // se a posição passada por parâmetro for inválida,
-                return false;                                                  // retorna falso
+                throw new Exception("Posição passada por parâmetro inválida");
 
             if (Double.IsNaN(valor) || valor == 0) // nós não queremos armazenar nada nulo
                 return false;
 
             PosicionaPonteiros(linha, 'L');
 
-            while (atual.Coluna <= coluna && atual.Coluna != 0)
+            while (atual.Coluna < coluna && atual.Coluna != 0)
             {
-                if (atual.Coluna == coluna) //se já existe algo na mesma linha e na mesma coluna
-                    return false;            //retorna falso pois não pode inserir
                 anterior = atual;
                 atual = atual.Direita;
             }
+
+            if (atual.Coluna == coluna) //se já existe algo na mesma linha e na mesma coluna
+                return false;           //retorna falso pois não pode inserir
 
             Celula novaCelula = new Celula(atual, null, linha, coluna, valor);
             anterior.Direita = novaCelula;
@@ -99,11 +107,62 @@ namespace Matriz_Esparsa
             return true;
         }
 
+        public void LerArquivo (String nomeArquivo)
+        {
+            this.Limpar();
+            StreamReader arquivo = new StreamReader(nomeArquivo);
+            String linha;
+            linhas = colunas = 0;
+            primeiro = new Celula(null, null, 0, 0, Double.NaN);
+            primeiro.Abaixo = primeiro;
+            primeiro.Direita = primeiro;
+            while ((linha = arquivo.ReadLine()) != null)
+            {
+                int lin = Convert.ToInt32(linha.Substring(0, 3));
+                if (lin > linhas)
+                {
+                    anterior = primeiro;
+                    while (anterior.Abaixo != primeiro)
+                        anterior = anterior.Abaixo;
+                    for (int i = linhas; i <= lin; i++)
+                    {
+                        atual = new Celula(null, null, i, 0, Double.NaN);
+                        atual.Direita = atual; // não existe dado ainda, logo o nó aponta para si mesmo
+                        anterior.Abaixo = atual; // faz o nó anterior apontar para o nó atual
+                        anterior = atual;
+                    }
+                    atual.Abaixo = primeiro;
+                    linhas = lin;
+                }
+                int col = Convert.ToInt32(linha.Substring(3, 3));
+                if (col > colunas)
+                {
+                    anterior = primeiro;
+                    while (anterior.Direita != primeiro)
+                        anterior = anterior.Direita;
+                    for (int i = colunas; i <= col; i++)
+                    {
+                        atual = new Celula(null, null, 0, i, Double.NaN);
+                        atual.Abaixo = atual; // não existe dado ainda, logo o nó aponta para si mesmo
+                        anterior.Direita = atual; // faz o nó anterior apontar para o nó atual
+                        anterior = atual;
+                    }
+                    atual.Direita = primeiro;
+                    colunas = col;
+                }
+
+                double val = Convert.ToDouble(linha.Substring(6));
+                this.InserirEm(lin, col, val);
+            }
+
+            arquivo.Close();
+        }
+
         //Retornar o valor de uma posição(l, c) da matriz - ValorDe - feito - atualizado
         public double ValorDe (int linha, int coluna)
         {
             if (linha > linhas || linha < 1 || coluna > colunas || coluna < 1)
-                throw new Exception("Valor de linha e/ou coluna inválido");
+                return Double.NaN;
 
             PosicionaPonteiros(linha, 'L');
 
@@ -114,7 +173,7 @@ namespace Matriz_Esparsa
                 atual = atual.Direita;
             }
 
-            return Double.NaN;
+            return 0;
         }
          
         //Exibir a matriz na tela, em um gridView - ExibirNoGridView - feito - atualizado
@@ -125,16 +184,15 @@ namespace Matriz_Esparsa
             dgv.ColumnCount = colunas;
             dgv.RowCount = linhas;
 
-            atual = primeiro.Abaixo.Direita;
-            while (atual.Linha != 0)
+            for (int l = 1; l <= linhas; l++)
             {
-                while (atual.Coluna != 0)
-                {
-                    dgv.Rows[atual.Linha - 1].Cells[atual.Coluna - 1].Value = atual.Valor;
-                    atual = atual.Direita;
-                }
-                atual = atual.Abaixo.Direita;
+                dgv.Rows[l - 1].HeaderCell.Value = String.Format("{0}", dgv.Rows[l-1].Index + 1);
+                for (int c = 1; c <= colunas; c++)
+                    dgv.Rows[l - 1].Cells[c - 1].Value = this.ValorDe(l, c);
             }
+
+            for (int c = 1; c <= colunas; c++)
+                dgv.Columns[c - 1].HeaderCell.Value = String.Format("{0}", dgv.Columns[c-1].Index + 1);
         }
 
         //Liberar todas as posições alocadas da matriz, incluindo sua estrutura básica - Limpar - feito - atualizado
@@ -190,12 +248,17 @@ namespace Matriz_Esparsa
                 throw new Exception("Não é possível somar NaN a um valor");
 
             PosicionaPonteiros(coluna, 'C');
-            while (atual.Linha != 0)
+            for (int i = 1; i <= linhas; i++)
             {
-                atual.Valor += valor;
-                if (atual.Valor == 0)
-                    RemoverElemento(atual.Linha, atual.Coluna);
-                atual = atual.Abaixo;
+                if (atual.Linha == i)
+                {
+                    atual.Valor += valor;
+                    if (atual.Valor == 0)
+                        RemoverElemento(atual.Linha, atual.Coluna);
+                    atual = atual.Abaixo;
+                }
+                else
+                    this.InserirEm(i, coluna, valor);
             }
         }
 
@@ -203,7 +266,7 @@ namespace Matriz_Esparsa
         //Somar duas matrizes esparsas, cada uma representada em uma estrutura própria e ambas exibidas
         //em seu próprio gridView.O resultado deve gerar uma nova estrutura de matriz esparsa e exibido
         //em um gridview próprio - SomarMatrizes - feito - atualizado
-        public ListaLigadaCruzada SomarMatrizes (ListaLigadaCruzada matriz1, ListaLigadaCruzada matriz2)
+        public static ListaLigadaCruzada SomarMatrizes (ListaLigadaCruzada matriz1, ListaLigadaCruzada matriz2)
         {
             if (matriz1.linhas != matriz2.linhas|| matriz1.colunas != matriz2.colunas)
                 throw new Exception("Não é possível somar matrizes com quantidade de linhas e colunas diferentes");
@@ -258,9 +321,9 @@ namespace Matriz_Esparsa
         //Multiplicar duas matrizes esparsas, cada uma representada em uma estrutura própria e ambas
         //exibidas em seu próprio gridView.O resultado deve gerar uma nova estrutura de matriz esparsa e
         //exibido em um gridview próprio. - MultiplicarMatrizes - fazendo
-        public ListaLigadaCruzada MultiplicarMatrizes (ListaLigadaCruzada matriz1, ListaLigadaCruzada matriz2)
+        public static ListaLigadaCruzada MultiplicarMatrizes (ListaLigadaCruzada matriz1, ListaLigadaCruzada matriz2)
         {
-            if (matriz1.colunas.Length != matriz2.linhas.Length)
+            if (matriz1.colunas != matriz2.linhas)
                 throw new Exception("Não é possível multiplicar matrizes se o número de colunas da primeira for diferentes do número de linhas da segunda");
 
             ListaLigadaCruzada result = new ListaLigadaCruzada(matriz1.linhas.Length, matriz2.colunas.Length);

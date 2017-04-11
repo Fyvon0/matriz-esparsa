@@ -15,11 +15,6 @@ namespace Matriz_Esparsa
         
         public Celula(Celula celulaDireita, Celula celulaAbaixo, int linhaCelula, int colunaCelula, double valorCelula)
         {
-            if (valorCelula == 0.0D)  // Vai contra o intuito do projeto que é justamente agilizar o funcionamento de uma matriz esparsa
-                throw new Exception("A célula não deve ter valor 0");
-            if (Double.IsNaN(valorCelula)) // Não é possível fazer operações com NaN
-                throw new Exception("O valor da célula não pode ser NaN");  
-
             direita = celulaDireita;
             abaixo = celulaAbaixo;
             linha = linhaCelula;

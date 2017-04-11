@@ -12,3 +12,15 @@ F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.
 E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe.config
 E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.exe
 E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.pdb
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csprojResolveAssemblyReference.cache
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Form1.resources
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Properties.Resources.resources
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csproj.GenerateResource.Cache
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe
+E:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.pdb
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.pdb
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csprojResolveAssemblyReference.cache
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Form1.resources
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Properties.Resources.resources
+F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csproj.GenerateResource.Cache
