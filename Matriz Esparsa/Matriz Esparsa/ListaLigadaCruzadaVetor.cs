@@ -41,7 +41,7 @@ namespace Matriz_Esparsa
             linhas = qtdeLinhas;
             colunas = qtdeColunas;
 
-            int i = 0;
+            int i = 1;
 
             anterior = primeiro = new Celula(null, null, 0, 0, Double.NaN);
 
@@ -55,7 +55,7 @@ namespace Matriz_Esparsa
             atual.Abaixo = primeiro; // faz o último nó cabeça nas linhas apontar para o primeiro
 
             anterior = primeiro;
-            for (i = 0; i <= qtdeColunas; i++)
+            for (i = 1; i <= qtdeColunas; i++)
             {
                 atual = new Celula(null, null, 0, i, Double.NaN);
                 atual.Abaixo = atual; // não existe dado ainda, logo o nó aponta para si mesmo
@@ -326,15 +326,17 @@ namespace Matriz_Esparsa
             if (matriz1.colunas != matriz2.linhas)
                 throw new Exception("Não é possível multiplicar matrizes se o número de colunas da primeira for diferentes do número de linhas da segunda");
 
-            ListaLigadaCruzada result = new ListaLigadaCruzada(matriz1.linhas.Length, matriz2.colunas.Length);
-            matriz1.atual = matriz1.linhas[1].Direita;
-            matriz2.atual = matriz2.colunas[1].Abaixo;
+            ListaLigadaCruzada result = new ListaLigadaCruzada(matriz1.linhas, matriz2.colunas);
+            double valor = 0;
 
-            while (matriz1.atual.Linha != 0)
-            {
-                while(matriz2.atual.Coluna != 0)
-                { }
-            }
+            for (int i = 1; i <= matriz1.linhas; i++)
+                for (int j = 1; j <= matriz2.colunas; j++)
+                {
+                    for (int k = 1; k <= matriz1.colunas; k++)
+                        valor += (matriz1.ValorDe(i, k) * matriz2.ValorDe(k, j));
+                    result.InserirEm(i,j,valor);
+                    valor = 0;
+                }
 
             return result;
         }

@@ -37,6 +37,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.gbxOperacoes = new System.Windows.Forms.GroupBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.cbxGrids = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,7 +56,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.button7 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.gbxCriarMatriz.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCriarGridView)).BeginInit();
@@ -189,6 +191,8 @@
             // 
             // gbxOperacoes
             // 
+            this.gbxOperacoes.Controls.Add(this.button9);
+            this.gbxOperacoes.Controls.Add(this.button8);
             this.gbxOperacoes.Controls.Add(this.button7);
             this.gbxOperacoes.Controls.Add(this.button6);
             this.gbxOperacoes.Controls.Add(this.cbxGrids);
@@ -211,6 +215,36 @@
             this.gbxOperacoes.TabStop = false;
             this.gbxOperacoes.Text = "Operações";
             this.gbxOperacoes.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(9, 351);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(97, 23);
+            this.button9.TabIndex = 18;
+            this.button9.Text = "Somar";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(9, 322);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(97, 23);
+            this.button8.TabIndex = 17;
+            this.button8.Text = "Multiplicar";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(9, 293);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(97, 23);
+            this.button7.TabIndex = 16;
+            this.button7.Text = "Ler Arquivo";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -270,10 +304,10 @@
             0,
             0});
             this.nudValor.Minimum = new decimal(new int[] {
-            1,
+            9999999,
             0,
             0,
-            0});
+            -2147483648});
             this.nudValor.Name = "nudValor";
             this.nudValor.Size = new System.Drawing.Size(63, 20);
             this.nudValor.TabIndex = 11;
@@ -399,16 +433,6 @@
             this.dataGridView3.Size = new System.Drawing.Size(950, 204);
             this.dataGridView3.TabIndex = 4;
             // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(9, 293);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(97, 23);
-            this.button7.TabIndex = 16;
-            this.button7.Text = "Ler Arquivo";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -472,6 +496,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 

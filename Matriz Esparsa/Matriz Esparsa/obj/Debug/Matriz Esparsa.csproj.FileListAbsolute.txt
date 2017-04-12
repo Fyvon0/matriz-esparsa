@@ -24,3 +24,12 @@ F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.
 F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Form1.resources
 F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Properties.Resources.resources
 F:\GitHub\matriz-esparsa\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csproj.GenerateResource.Cache
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe.config
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.exe
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\bin\Debug\Matriz Esparsa.pdb
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csprojResolveAssemblyReference.cache
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Form1.resources
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz_Esparsa.Properties.Resources.resources
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.csproj.GenerateResource.Cache
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.exe
+C:\Users\Lucas\Desktop\matriz-esparsa-d74e597d7d1bd40364e7c3b7a32d507dc89f8000\Matriz Esparsa\Matriz Esparsa\obj\Debug\Matriz Esparsa.pdb

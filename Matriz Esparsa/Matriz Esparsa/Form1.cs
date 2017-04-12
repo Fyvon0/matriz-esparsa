@@ -142,12 +142,32 @@ namespace Matriz_Esparsa
                 case 1:
                     matriz1.LerArquivo(openFileDialog1.FileName);
                     matriz1.ExibirNoGridView(dataGridView1);
+                    if (!cbxGrids.Items.Contains(1))
+                        cbxGrids.Items.Add(1);
                     break;
                 case 2:
                     matriz2.LerArquivo(openFileDialog1.FileName);
                     matriz2.ExibirNoGridView(dataGridView2);
+                    if (!cbxGrids.Items.Contains(2))
+                        cbxGrids.Items.Add(2);
                     break;
             }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (cbxGrids.Items.Count == 2)
+                ListaLigadaCruzada.MultiplicarMatrizes(matriz1, matriz2).ExibirNoGridView(dataGridView3);
+            else
+                MessageBox.Show("É necessário ter duas matrizes para fazer a multiplicação");      
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (cbxGrids.Items.Count == 2)
+                ListaLigadaCruzada.SomarMatrizes(matriz1, matriz2).ExibirNoGridView(dataGridView3);
+            else
+                MessageBox.Show("É necessário ter duas matrizes para fazer a soma");
         }
 
         private void button1_Click(object sender, EventArgs e)
